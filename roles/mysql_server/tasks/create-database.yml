@@ -1,0 +1,30 @@
+- name: Copy mysql.sql to /root/
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - {src: "mysql.sql.j2", dest: "/root/mysql.sql" }
+    - {src: "mysql_check_database.sql.j2", dest: "/root/mysql_check_database.sql" }
+
+- name: "Check for DB {{ mysql_database }}"
+  shell: 
+    cmd: mysql -N -s < mysql_check_database.sql;
+  register: check_database
+
+- debug:
+    var: check_database['stdout']
+
+- name: Import Database
+  mysql_db:
+    state: import
+    name: all
+    target: "/root/mysql.sql"
+  when: check_database['stdout'] == ""
+
+- name: "Delete files"
+  file:
+    path: "{{ item.dest }}"
+    state: absent
+  with_items:
+    - {dest: "/root/mysql.sql" }
+    - {dest: "/root/mysql_check_database.sql" }

@@ -1,0 +1,34 @@
+- name: Inject java agent into tomcat startup file
+  hosts: webserver
+  become: yes
+  become_user: root
+  vars:
+    appd_unique_hostid: "{{ secret_unique_hostid }}"
+    agent_directory: "{{ java_agent_directory }}"
+    tomcat_dir: /opt/tomcat/bin
+    tomcat_service_name: tomcat
+    appd_http_proxy_host: "{{ secret_http_proxy_host }}"
+    appd_http_proxy_port: "{{ secret_http_proxy_port }}"
+    appd_https_proxy_host: "{{ secret_https_proxy_host }}"
+    appd_https_proxy_port: "{{ secret_https_proxy_port }}"
+
+  tasks:
+
+  - name: "Copy setenv.sh to {{ tomcat_dir }}"
+    template:
+      src: cross_role_data/tomcat_setenv.sh.j2
+      dest: "{{ tomcat_dir }}/setenv.sh"
+      owner: root
+      group: tomcat
+      mode: '0774'
+
+  - name: Add the user 'tomcat' to groups 'appd'
+    user:
+      name: tomcat
+      groups: appd
+      append: yes
+
+  - name: "Make sure the service '{{ tomcat_service_name }}' is restarted"
+    systemd:
+      name: "{{ tomcat_service_name }}"
+      state: restarted # started, stopped, restarted

@@ -1,0 +1,7 @@
+---
+# handlers file for appd_machine_agent
+
+- name: Reload service firewalld
+  systemd:
+    name: firewalld
+    state: reloaded

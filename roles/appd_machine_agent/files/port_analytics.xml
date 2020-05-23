@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>port_analytics</short>
+  <description>App Analytics Port</description>
+  <port port="9091" protocol="tcp"/>
+</service>

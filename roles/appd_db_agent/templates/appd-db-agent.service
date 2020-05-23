@@ -1,0 +1,11 @@
+[Unit]
+Description=AppDynamics Database Agent
+
+[Service]
+Type=simple
+User=appd
+SuccessExitStatus=143 # Killing the service using systemd causes Java to exit with status 143. This is OK.
+ExecStart=/bin/sh -c "{{agent_directory}}/db_agent.sh start"
+
+[Install]
+WantedBy=multi-user.target

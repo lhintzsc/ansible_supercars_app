@@ -1,0 +1,46 @@
+---
+# directory and zip file
+appd_directory: "{{ all_appd_directory }}"
+agent_directory: "{{ machine_agent_directory }}"
+agent_zip: "{{ machine_agent_zip }}"
+agent_name: "{{ agent_zip | basename | regex_replace('.zip')  }}"
+unzip_directory: "{{ appd_directory }}/{{ agent_name }}"
+
+# configuration files
+appd_controller_info: '{{ agent_directory }}/conf/controller-info.xml'
+appd_analytics_monitor: '{{ agent_directory }}/monitors/analytics-agent/monitor.xml'
+appd_analytics_properties: '{{ agent_directory }}/monitors/analytics-agent/conf/analytics-agent.properties'
+
+# service definition
+appd_systemd_service_name: appd-machine-agent.service
+appd_systemd_service_path: /usr/lib/systemd/system
+appd_systemd_service_link: /etc/systemd/system
+
+# proxy settings
+http_proxy_host: "{{ secret_http_proxy_host }}"
+http_proxy_port: "{{ secret_http_proxy_port }}"
+https_proxy_host: "{{ secret_https_proxy_host }}"
+https_proxy_port: "{{ secret_https_proxy_port }}"
+
+# server config /opt/appd/machine_agent/conf/controller-info.xml
+appd_controller_url: "{{ secret_controller_url }}"
+appd_controller_port: "{{ secret_controller_port }}"
+appd_controller_protocoll: "{{ secret_controller_protocoll }}"
+appd_ssl_enabled: "{{ secret_ssl_enabled }}"
+
+appd_account_name: "{{ secret_account_name }}"
+appd_account_name_global: "{{ secret_account_name_global }}"
+appd_account_key: "{{ secret_account_key }}"
+
+appd_application: "{{ secret_application }}"
+appd_unique_hostid: "{{ secret_unique_hostid }}"
+
+appd_sim_enabled: "{{ secret_sim_enabled }}"
+appd_metric_path: "{{ secret_metric_path }}"
+
+appd_analytics_agent_name: "{{ secret_analytics_agent_name }}"
+appd_analytics_enabled: "{{ secret_analytics_enabled }}"
+
+appd_event_custer_url: "{{ secret_event_custer_url }}"
+appd_event_custer_port: "{{ secret_event_custer_port }}"
+appd_event_custer_protocoll: "{{ secret_event_custer_protocoll }}"

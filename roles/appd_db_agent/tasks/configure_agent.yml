@@ -1,0 +1,8 @@
+---
+- name: 'Copy controller-info.xml to {{ appd_controller_info }}'
+  template:
+    src: controller-info.xml
+    dest: '{{ appd_controller_info }}'
+    owner: appd
+    group: appd
+    mode: '0774'

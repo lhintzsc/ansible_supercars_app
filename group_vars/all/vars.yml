@@ -1,0 +1,18 @@
+#connecting_host: "{{ hostvars['webserver']['ansible_host'] }}" # supercars DB user only for webserver
+connecting_host: "%" # open for all hosts incl sql clients
+#connecting_host: "127.0.0.1" # open for localhost if weberserver and db are on the same machine
+timezone: "Europe/Vienna"
+
+# appdynamics parameter
+machine_agent_zip: machineagent-bundle-64bit-linux-20.4.0.2571.zip
+java_agent_zip: AppServerAgent-20.4.0.29862.zip
+db_agent_zip: db-agent-20.4.0.1730.zip
+
+machine_agent_uri: "https://download.appdynamics.com/download/prox/download-file/machine-bundle/20.4.0.2571/machineagent-bundle-64bit-linux-20.4.0.2571.zip"
+java_agent_uri: "https://download.appdynamics.com/download/prox/download-file/sun-jvm/20.4.0.29862/AppServerAgent-20.4.0.29862.zip"
+db_agent_uri: "https://download.appdynamics.com/download/prox/download-file/db-agent/20.4.0.1730/db-agent-20.4.0.1730.zip"
+
+all_appd_directory: /opt/appd
+java_agent_directory: /opt/appd/java_agent
+machine_agent_directory: /opt/appd/machine_agent
+db_agent_directory: /opt/appd/db_agent

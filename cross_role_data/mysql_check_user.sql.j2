@@ -1,0 +1,6 @@
+SELECT 
+    count(*) 
+FROM mysql.user 
+WHERE user='{{ user }}'
+AND host='{{ host }}'
+LIMIT 1;

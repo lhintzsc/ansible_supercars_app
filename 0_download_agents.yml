@@ -1,0 +1,72 @@
+---
+- name: Download appd agents
+  hosts: localhost
+  vars:
+    download_username: "{{ secret_download_username }}"
+    download_password: "{{ secret_download_password }}"
+    download_java_agent_uri: "{{ java_agent_uri }}"
+    download_machine_agent_uri: "{{ machine_agent_uri }}"
+    download_db_agent_uri: "{{ db_agent_uri }}"
+    download_java_agent_file: "{{ download_java_agent_uri | basename }}"
+    download_machine_agent_file: "{{ download_machine_agent_uri | basename }}"
+    download_db_agent_file: "{{ download_db_agent_uri | basename }}"
+    download_java_agent_path: "./roles/appd_java_agent/files/{{ download_java_agent_file}}"
+    download_machine_agent_path: "./roles/appd_machine_agent/files/{{ download_machine_agent_file}}"
+    download_db_agent_path: "./roles/appd_db_agent/files/{{ download_db_agent_file}}"
+
+
+  tasks:
+    - name: Login to appdynamics
+      uri:
+        url: https://identity.msrv.saas.appdynamics.com/v2.0/oauth/token
+        method: POST
+        body_format: json
+        body: '{"username": "{{ download_username }}","password": "{{ download_password }}","scopes": ["download"]}'
+        status_code: 200
+      register: login
+    
+    - name: "Check if {{ download_machine_agent_path }} exists"
+      stat:
+        path: "{{ download_machine_agent_path }}"
+      register: stat_machine_agent
+    
+    - name: Download machine agent
+      uri:
+        url: "{{ download_machine_agent_uri }}"
+        method: GET
+        headers:
+          Authorization: "Bearer {{ login.json.access_token }}"
+        dest: ./roles/appd_machine_agent/files
+        status_code: 200
+      when: not stat_machine_agent.stat.exists
+
+    - name: "Check if {{ download_db_agent_path }} exists"
+      stat:
+        path: "{{ download_db_agent_path }}"
+      register: stat_db_agent
+
+    - name: Download db agent
+      uri:
+        url: "{{ download_db_agent_uri }}"
+        method: GET
+        headers:
+          Authorization: "Bearer {{ login.json.access_token }}"
+        dest: ./roles/appd_db_agent/files
+        status_code: 200
+      when: not stat_db_agent.stat.exists
+
+    - name: "Check if {{ download_java_agent_path }} exists"
+      stat:
+        path: "{{ download_java_agent_path }}"
+      register: stat_java_agent
+
+    - name: Download java agent
+      uri:
+        url: "{{ download_java_agent_uri }}"
+        method: GET
+        headers:
+          Authorization: "Bearer {{ login.json.access_token }}"
+        dest: ./roles/appd_java_agent/files
+        status_code: 200
+      when: not stat_java_agent.stat.exists
+    

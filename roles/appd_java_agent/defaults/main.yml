@@ -1,0 +1,32 @@
+---
+# defaults file for appd_java_agent
+
+# proxy settings
+http_proxy_host: "{{ secret_http_proxy_host }}"
+http_proxy_port: "{{ secret_http_proxy_port }}"
+https_proxy_host: "{{ secret_https_proxy_host }}"
+https_proxy_port: "{{ secret_https_proxy_port }}"
+
+# directory and zip file
+appd_directory: "{{ all_appd_directory }}"
+agent_directory: "{{ java_agent_directory }}"
+agent_zip: "{{ java_agent_zip }}"
+agent_name: "{{ agent_zip | basename | regex_replace('.zip')  }}"
+unzip_directory: "{{ appd_directory }}/{{ agent_name }}"
+
+# config file
+appd_controller_info: '{{ agent_directory }}/conf/controller-info.xml'
+
+# server config /opt/appd/machine_agent/conf/controller-info.xml
+appd_controller_url: "{{ secret_controller_url }}"
+appd_controller_port: "{{ secret_controller_port }}"
+appd_controller_protocoll: "{{ secret_controller_protocoll }}"
+appd_ssl_enabled: "{{ secret_ssl_enabled }}"
+
+appd_account_name: "{{ secret_account_name }}"
+appd_account_key: "{{ secret_account_key }}"
+
+appd_application: "{{ secret_application }}"
+appd_tier: "{{ secret_tier }}"
+appd_node: "{{ secret_node }}"
+appd_unique_hostid: "{{ secret_unique_hostid }}"

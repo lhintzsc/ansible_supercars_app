@@ -1,0 +1,24 @@
+---
+- name: 'Copy controller-info.xml to {{ appd_controller_info }}'
+  template:
+    src: controller-info.xml
+    dest: '{{ appd_controller_info }}'
+    owner: appd
+    group: appd
+    mode: '0774'
+
+- name: 'Copy monitor.xml to {{ appd_analytics_monitor }}'
+  template:
+    src: monitor.xml
+    dest: '{{ appd_analytics_monitor }}'
+    owner: appd
+    group: appd
+    mode: '0774'
+
+- name: 'Copy analytics-agent.properties to {{ appd_analytics_properties }}'
+  template:
+    src: analytics-agent.properties
+    dest: '{{ appd_analytics_properties }}'
+    owner: appd
+    group: appd
+    mode: '0774'

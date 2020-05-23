@@ -1,0 +1,10 @@
+AGENT="-javaagent:{{ agent_directory }}/javaagent.jar"
+
+AGENT_OPTIONS=""
+AGENT_OPTIONS="$AGENT_OPTIONS -Dappdynamics.agent.uniqueHostId={{ appd_unique_hostid }}"
+AGENT_OPTIONS="$AGENT_OPTIONS -Dappdynamics.http.proxyHost={{ appd_http_proxy_host }}"
+AGENT_OPTIONS="$AGENT_OPTIONS -Dappdynamics.http.proxyPort={{ appd_http_proxy_port }}"
+AGENT_OPTIONS="$AGENT_OPTIONS -Dappdynamics.https.proxyHost={{ appd_https_proxy_host }}"
+AGENT_OPTIONS="$AGENT_OPTIONS -Dappdynamics.https.proxyPort={{ appd_https_proxy_port }}"
+
+export CATALINA_OPTS="$CATALINA_OPTS $AGENT $AGENT_OPTIONS"

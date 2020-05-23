@@ -1,0 +1,3 @@
+database_username: "{{ secret_mysql_username }}"
+database_password: "{{ secret_mysql_password }}"
+database_host: "{{ hostvars['database']['ansible_host'] }}"

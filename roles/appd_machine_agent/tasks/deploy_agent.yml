@@ -1,0 +1,35 @@
+- name: "Create {{ unzip_directory }} if it does not exist"
+  file:
+    path: '{{ unzip_directory }}'
+    recurse: yes
+    owner: appd 
+    group: appd 
+    mode: '0774'
+    state: directory  # directory or file
+# https://docs.ansible.com/ansible/latest/modules/file_module.html
+# http://www.filepermissions.com/file-permissions-index
+
+- name: "Extract {{ agent_zip }} into {{ unzip_directory }}"
+  unarchive:
+    src: '{{ agent_zip }}'
+    dest: '{{ unzip_directory }}'
+# https://docs.ansible.com/ansible/latest/modules/unarchive_module.html
+
+- name: "Create symbolic {{ agent_directory }} -> {{ unzip_directory }}"
+  file:
+    src: '{{ unzip_directory }}'
+    dest: '{{ agent_directory }}'
+    owner: appd 
+    group: appd 
+    mode: '0774'
+    state: link
+# https://docs.ansible.com/ansible/latest/modules/file_module.html
+
+- name: "Recursively set owner appd and group appd of dir {{ agent_directory }}"
+  file:
+    path: '{{ agent_directory }}'
+    state: directory
+    recurse: yes
+    owner: appd
+    group: appd
+    mode: '0774'

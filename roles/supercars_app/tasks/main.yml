@@ -1,0 +1,37 @@
+- name: Install packages
+  yum:
+    name:
+      - unzip
+      - java-1.7.0-openjdk
+    update_cache: true
+    state: latest
+  register: result
+
+- name: Create directory /opt/tomcat/webapps/Cars_Sample_App
+  file:
+    path: /opt/tomcat/webapps/Cars_Sample_App
+    state: directory
+  
+- name: Deploy Cars_Sample_App.war to /opt/tomcat/webapps/Cars_Sample_App
+  unarchive:
+    src: files/target/Cars_Sample_App.war
+    dest: /opt/tomcat/webapps/Cars_Sample_App
+  notify: 
+    - Restart tomcat
+
+- name: Copy database config to Tomcat server
+  template:
+    src: context.xml.j2
+    dest: /opt/tomcat/webapps/Cars_Sample_App/META-INF/context.xml
+  notify: 
+    - Restart tomcat
+
+- name: Change user, group and permission of /opt/tomcat/webapps/Cars_Sample_App
+  file:
+    path: /opt/tomcat/webapps/Cars_Sample_App
+    owner: tomcat
+    group: tomcat
+    mode: "2750"
+    recurse: true
+
+

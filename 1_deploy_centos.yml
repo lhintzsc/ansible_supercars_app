@@ -1,0 +1,9 @@
+---
+- name: Setup centos server
+  tags: setup_centos
+  hosts: centos
+  become: yes
+  become_user: root
+  gather_facts: false
+  roles:
+  - centos_server

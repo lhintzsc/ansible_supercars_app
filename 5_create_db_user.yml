@@ -1,0 +1,119 @@
+- name: Create DB user for monitoring with appdynamics
+  hosts: database
+  become: yes
+  become_user: root
+  
+  vars:
+    appd_dbuser_username: "{{ secret_dbuser_username }}"
+    appd_dbuser_password: "{{ secret_dbuser_password }}"
+    appd_dbuser_os_username: "{{ secret_dbuser_os_username }}"
+    appd_dbuser_os_password: "{{ secret_dbuser_os_password }}"
+    appd_db_agent: "{{ hostvars['db_agent']['ansible_host'] }}"
+
+  tasks:
+
+    # create localhost DB user
+    - name: "Copy SQL commands to /root"
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: '0644'
+      vars:
+        user: "{{ appd_dbuser_username }}"
+        host: 'localhost'
+        password: "{{ appd_dbuser_password }}"
+      with_items:
+        - { src: ./cross_role_data/mysql_check_user.sql.j2, dest: /root/mysql_check_user.sql }
+        - { src: ./cross_role_data/mysql_create_monitor_user.sql.j2, dest: /root/mysql_create_monitor_user.sql} 
+
+    - name: "Check for DB user {{ appd_dbuser_username }}@localhost"
+      shell: 
+        cmd: mysql -N -s < mysql_check_user.sql;
+      register: local_user_count
+
+    - name: "Create DB user {{ appd_dbuser_username }}@localhost"
+      shell: 
+        cmd: mysql -N -s < mysql_create_monitor_user.sql;
+      when: local_user_count['stdout'] == "0"
+
+    - name: "Delete files"
+      file:
+        path: "{{ item.dest }}"
+        state: absent
+      with_items:
+        - { dest: /root/mysql_check_user.sql }
+        - { dest: /root/mysql_create_monitor_user.sql }
+  
+    # create DB-Agent DB user
+    - name: "Copy SQL commands to /root"
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: '0644'
+      vars:
+        user: "{{ appd_dbuser_username }}"
+        host: "{{ appd_db_agent }}"
+        password: "{{ appd_dbuser_password }}"
+      with_items:
+        - { src: ./cross_role_data/mysql_check_user.sql.j2, dest: /root/mysql_check_user.sql }
+        - { src: ./cross_role_data/mysql_create_monitor_user.sql.j2, dest: /root/mysql_create_monitor_user.sql} 
+
+    - name: "Check for DB user {{ appd_dbuser_username }}@{{ appd_db_agent }}"
+      shell: 
+        cmd: mysql -N -s < mysql_check_user.sql;
+      register: local_user_count
+
+    - name: "Create DB user {{ appd_dbuser_username }}@{{ appd_db_agent }}"
+      shell: 
+        cmd: mysql -N -s < mysql_create_monitor_user.sql;
+      when: local_user_count['stdout'] == "0"
+
+    - name: "Delete files"
+      file:
+        path: "{{ item.dest }}"
+        state: absent
+      with_items:
+        - { dest: /root/mysql_check_user.sql }
+        - { dest: /root/mysql_create_monitor_user.sql }  
+
+    # Create monitoring user for OS
+    - name: Ensure group 'appd' exists
+      group:
+        name: appd
+        state: present
+
+    - name: Create user for monitoring the OS
+      user:
+        name: "{{ appd_dbuser_os_username }}"
+        password: "{{ appd_dbuser_os_password }}"
+        groups: appd
+        append: yes
+
+    - name: Copy ./cross_role_data/sshd_config to /etc/ssh/sshd_config
+      copy:
+        src: ./cross_role_data/sshd_config
+        dest: /etc/ssh/sshd_config
+        owner: root
+        group: root
+        mode: '0600'
+      notify: Restart sshd
+
+    - name: Copy ./cross_role_data/ssh_config to /etc/ssh/ssh_config
+      copy:
+        src: ./cross_role_data/ssh_config
+        dest: /etc/ssh/ssh_config
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Restart sshd
+
+  handlers:
+
+    - name: "Restart sshd"
+      systemd:
+        name: sshd
+        state: restarted # started, stopped, restarted

@@ -1,0 +1,7 @@
+---
+tomcat_version: 8.5.23
+tomcat_permissions_production: True
+tomcat_users:
+  - username: "{{ secret_tomcat_username }}"
+    password: "{{ secret_tomcat_password }}"
+    roles: "tomcat,admin,manager,manager-gui"

@@ -1,0 +1,52 @@
+- name: Install basic packages
+  tags: centos_basic
+  yum:
+    name:
+      - firewalld
+      - vim-enhanced
+      - git
+      - wget
+      - curl
+      - nmap
+      - rsync
+      - traceroute
+      - ntp
+      - net-tools
+    update_cache: true
+    state: latest
+  register: result
+
+- name: Set hostname
+  hostname: 
+    name: "{{inventory_hostname}}"
+
+- name: Copy vimrc file
+  copy:
+    src: vimrc
+    dest: ~/.vimrc
+
+- name: Copy bashrc file
+  copy:
+    src: bashrc
+    dest: ~/.bashrc
+  notify:
+  - Source bashrc
+
+- name: Copy profile to set proxy
+  template:
+    src: profile.j2
+    dest: /etc/profile
+  
+- name: "Set system timezone to {{ centos_timezone }}"
+  timezone:
+    name: "{{ centos_timezone }}"
+
+- name: Copy NTP configuration file to /etc/ntp.conf
+  template:
+    src: ntp.conf.j2
+    dest: /etc/ntp.conf
+    owner: root
+    group: wheel
+    mode: u=r+w,g=r,o=r
+  notify:
+  - Restart ntpd

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>port_http</short>
+  <description>HTTP Port</description>
+  <port port="8080" protocol="tcp"/>
+</service>

@@ -1,0 +1,16 @@
+CREATE
+USER '{{ user }}'@'{{ host }}'
+IDENTIFIED BY '{{ password }}';
+
+GRANT 
+SELECT,PROCESS,SHOW DATABASES 
+ON *.* 
+TO '{{ user }}'@'{{ host }}'
+IDENTIFIED BY '{{ password }}';
+
+GRANT 
+REPLICATION CLIENT 
+ON *.* 
+TO '{{ user }}'@'{{ host }}';
+
+FLUSH PRIVILEGES;

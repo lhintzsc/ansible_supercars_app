@@ -1,0 +1,27 @@
+- name: Deploy machine agent
+  tags: appd_machine
+  hosts: webserver
+  become: yes
+  become_user: root
+  gather_facts: false
+  roles:
+  - appd_machine_agent
+
+- name: Deploy db agent
+  tags: appd_db
+  hosts: db_agent
+  become: yes
+  become_user: root
+  gather_facts: false
+  roles:
+  - centos_server
+  - appd_db_agent
+
+- name: Deploy java agent
+  tags: appd_java
+  hosts: webserver
+  become: yes
+  become_user: root
+  gather_facts: false
+  roles:
+  - appd_java_agent

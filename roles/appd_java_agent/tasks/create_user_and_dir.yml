@@ -1,0 +1,30 @@
+- name: Ensure group 'appd' exists
+  group:
+    name: appd
+    state: present
+# https://docs.ansible.com/ansible/latest/modules/group_module.html
+
+- name: Add the user 'appd' with primary group of 'appd'
+  user:
+    name: appd
+    group: appd
+    append: yes
+# https://docs.ansible.com/ansible/latest/modules/user_module.html
+
+- name: Add the user 'root' to groups 'appd'
+  user:
+    name: root
+    groups: appd
+    append: yes
+# https://docs.ansible.com/ansible/latest/modules/user_module.html
+
+- name: "Create {{ appd_directory }} if it does not exist"
+  file:
+    path: "{{ appd_directory }}"
+    recurse: yes
+    owner: appd 
+    group: appd 
+    mode: '0774'
+    state: directory  # directory or file
+# https://docs.ansible.com/ansible/latest/modules/file_module.html
+# http://www.filepermissions.com/file-permissions-index

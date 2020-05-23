@@ -1,0 +1,8 @@
+---
+# tasks file for appd_db_agent
+
+- include_tasks: install_basic_packages.yml
+- include_tasks: create_user_and_dir.yml
+- include_tasks: deploy_agent.yml
+- include_tasks: configure_agent.yml
+- include_tasks: configure_service.yml

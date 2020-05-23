@@ -1,0 +1,50 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# alias definitions
+alias ll='ls -lhtr'
+alias la='ls -lahtr'
+alias lf='ls -altr | grep -v ^d'
+alias lg='ls -lah | grep'
+alias h='history 10'
+alias hg='history | grep'
+alias vi='vim'
+alias bc='bc -l'
+alias df='df -h'
+alias restartNetwork='systemctl restart network'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

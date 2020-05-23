@@ -1,0 +1,19 @@
+- name: 'Copy {{ appd_systemd_service_name }} to {{ appd_systemd_service_path }}'
+  template:
+    src: '{{ appd_systemd_service_name }}'
+    dest: '{{ appd_systemd_service_path }}/{{ appd_systemd_service_name }}'
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: "Create symbolic {{ appd_systemd_service_path }}/{{ appd_systemd_service_name }} -> {{ appd_systemd_service_link }}/{{ appd_systemd_service_name }}"
+  file:
+    src: '{{ appd_systemd_service_path }}/{{ appd_systemd_service_name }}'
+    dest: '{{ appd_systemd_service_link }}/{{ appd_systemd_service_name }}'
+    state: link
+
+- name: "Make sure service '{{ appd_systemd_service_name }}' is running"
+  systemd:
+    name: '{{ appd_systemd_service_name }}'
+    state: started # started, stopped, restarted
+# https://docs.ansible.com/ansible/latest/modules/systemd_module.html 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>port_DB</short>
+  <description>Database Port</description>
+  <port port="3306" protocol="tcp"/>
+</service>

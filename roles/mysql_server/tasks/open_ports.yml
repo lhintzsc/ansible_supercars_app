@@ -1,0 +1,21 @@
+- name: Copy services to /usr/lib/firewalld/services
+  copy: 
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: port_db.xml, dest: /usr/lib/firewalld/services/port_db.xml }
+  notify:
+    - Reload service firewalld
+
+- meta: flush_handlers
+
+- name: Activate ports
+  firewalld:
+    zone: public
+    service: "{{ item.port }}"
+    permanent: yes
+    state: enabled
+  with_items:
+    - { port: port_db }
+  notify:
+    - Reload service firewalld

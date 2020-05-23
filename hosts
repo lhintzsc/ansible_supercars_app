@@ -1,0 +1,11 @@
+[all:children]
+centos
+jumper
+
+[centos]
+webserver ansible_host=10.51.71.53
+database ansible_host=10.51.71.54
+db_agent ansible_host=10.51.71.56
+
+[jumper]
+localhost ansible_connection=local

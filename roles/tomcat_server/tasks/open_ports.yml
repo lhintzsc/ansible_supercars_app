@@ -1,0 +1,23 @@
+- name: Copy services to /usr/lib/firewalld/services
+  copy: 
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: port_http.xml, dest: /usr/lib/firewalld/services/port_http.xml }
+    - { src: port_https.xml, dest: /usr/lib/firewalld/services/port_https.xml }
+  notify:
+    - Reload service firewalld
+
+- meta: flush_handlers
+
+- name: Activate ports
+  firewalld:
+    zone: public
+    service: "{{ item.port }}"
+    permanent: yes
+    state: enabled
+  with_items:
+    - { port: port_http }
+    - { port: port_https }
+  notify:
+    - Reload service firewalld

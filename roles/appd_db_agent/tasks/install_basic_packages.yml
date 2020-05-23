@@ -1,0 +1,8 @@
+---
+- name: Install a list of packages
+  yum:
+    name: 
+    - unzip
+    - java-1.8.0-openjdk
+    state: present
+# https://docs.ansible.com/ansible/latest/modules/yum_module.html 
