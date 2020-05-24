@@ -20,25 +20,31 @@ You can encrypt your personal vault file using
 * ansible-vault encrypt vault.yml
 
 The Playbooks were split chronologically to give a logical order
-and to allow seperate deployment types:
+and to allow seperate deployment types.
+
+Downloads appdynamics agents (optional instrumentation):
 
 * ansible-playbook 0_download_agents.yml --ask-vault-pass
-* optional, downloads appdynamics agents
+
+Basic setup for all centos server (core deployment):
 
 * ansible-playbook 1_deploy_centos.yml --ask-vault-pass
-* mandatory, basic setup for all centos server
+
+Deploy supercars application (core deployment):
 
 * ansible-playbook 2_deploy_supercars.yml --ask-vault-pass
-* mandatory, deploys the supercars application
+
+Depploys appdynamics machine agent, java agent, and DB agent (optional instrumentation):
 
 * ansible-playbook 3_deploy_appd.yml --ask-vault-pass
-* optional, depploys appdynamics machine agent, java agent, and DB agent
+
+Injects the java agent to JAVA_OPTS (optional instrumentation):
 
 * ansible-playbook 4_inject_java_agent.yml --ask-vault-pass
-* optional, injects the java agent to JAVA_OPTS
 
-* ansible-playbook 5_create_db_user.yml --ask-vault-pass 
-* optional, create a DB user for monitoring
+Create DB user for monitoring the DB and the DB server (optional instrumentation):
+
+* ansible-playbook 5_create_db_user.yml --ask-vault-pass
 
 # Github Links
 
