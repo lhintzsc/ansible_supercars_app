@@ -88,8 +88,8 @@
 
     - name: Create user for monitoring the OS
       user:
-        name: "{{ appd_dbuser_os_username }}"
-        password: "{{ appd_dbuser_os_password }}"
+        name: "{{ secret_dbuser_os_username }}"
+        password: "{{ secret_dbuser_os_username  | password_hash('sha512') }}"
         groups: appd
         append: yes
 
@@ -116,4 +116,4 @@
     - name: "Restart sshd"
       systemd:
         name: sshd
-        state: restarted # started, stopped, restarted
+        state: restarted
