@@ -1,11 +1,12 @@
 # ntp and proxy server
-secret_ntp_server: "changeme"
-secret_http_proxy_host: ""
-secret_http_proxy_port: ""
-secret_https_proxy_host: ""
-secret_https_proxy_port: ""
+secret_ntp_server: "changeme" # use your own nts server or use a public server from https://www.pool.ntp.org/zone/nl
+secret_http_proxy_host: "" # optional in case of a proxy
+secret_http_proxy_port: "" # optional in case of a proxy
+secret_https_proxy_host: "" # optional in case of a proxy
+secret_https_proxy_port: "" # optional in case of a proxy
 
 # login data for https://download.appdynamics.com/download/
+# needed if you want to download and deploy appdynamics
 secret_download_username: "changeme"
 secret_download_password: "changeme"
 
