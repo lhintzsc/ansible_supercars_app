@@ -36,7 +36,7 @@
         method: GET
         headers:
           Authorization: "Bearer {{ login.json.access_token }}"
-        dest: ./roles/appd_machine_agent/files
+        dest: "{{ download_machine_agent_path }}"
         status_code: 200
       when: not stat_machine_agent.stat.exists
 
@@ -51,7 +51,7 @@
         method: GET
         headers:
           Authorization: "Bearer {{ login.json.access_token }}"
-        dest: ./roles/appd_db_agent/files
+        dest: "{{ download_db_agent_path }}"
         status_code: 200
       when: not stat_db_agent.stat.exists
 
@@ -66,7 +66,7 @@
         method: GET
         headers:
           Authorization: "Bearer {{ login.json.access_token }}"
-        dest: ./roles/appd_java_agent/files
+        dest: "{{ download_java_agent_path }}"
         status_code: 200
       when: not stat_java_agent.stat.exists
     
