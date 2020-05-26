@@ -1,0 +1,12 @@
+---
+# handlers file for ssh_center
+- name: "Create known_hosts"
+  file:
+    path: "{{ ssh_center.ssh.known_hosts.path }}"
+    mode: "{{ ssh_center.ssh.known_hosts.mode}}"
+    state: touch
+
+- name: "Create ssh key pair"
+  openssh_keypair:
+    path: "{{ ssh_center.ssh.private_key.path }}"
+    type: "{{ ssh_center.ssh.type }}"

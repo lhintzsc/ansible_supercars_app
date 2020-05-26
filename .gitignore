@@ -1,3 +1,11 @@
 roles/appd_machine_agent/files/machineagent-bundle-64bit-linux-*.zip
 roles/appd_java_agent/files/AppServerAgent-*.zip
 roles/appd_db_agent/files/db-agent-*.zip
+cross_role_data/temp/id_rsa
+cross_role_data/temp/id_rsa.pub
+cross_role_data/temp/id_ssh_rsa.pub
+test_role.yml
+group_vars/all/vault.yml
+roles/ssh_center/files/id_rsa.pub
+roles/ssh_center/files/id_rsa
+roles/ssh_center/tests/test.yml

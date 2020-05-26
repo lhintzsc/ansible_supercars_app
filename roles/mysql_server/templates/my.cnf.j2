@@ -6,6 +6,7 @@ port = {{ mysql_port }}
 socket = {{ mysql_socket }}
 
 [mysqld]
+default-time-zone= {{ timezone_number }}
 port = {{ mysql_port }}
 bind-address = {{ mysql_bind_address }}
 datadir = {{ mysql_datadir }}

@@ -1,0 +1,7 @@
+- name: "Create user for ssh center host"
+  include_tasks: create_user_group_loop.yml
+  loop: "{{ ssh_center.host }}"
+
+- name: "Create user for ssh remote hosts"
+  include_tasks: create_user_group_loop.yml
+  loop: "{{ ssh_remotes.hosts }}"

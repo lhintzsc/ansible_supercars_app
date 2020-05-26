@@ -1,0 +1,6 @@
+---
+# tasks file for ssh_center
+
+- include_tasks: create_user_group.yml
+- include_tasks: create_ssh_key_pair.yml
+- include_tasks: set_key_and_fingerprint.yml

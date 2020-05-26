@@ -1,0 +1,61 @@
+- name: "Create {{ ssh_center.ssh.dir.path }} if it does not exist"
+  file:
+    path: "{{ ssh_center.ssh.dir.path }}"
+    owner: "{{ ssh_center.host[0].user }}"
+    group: "{{ ssh_center.host[0].group }}" 
+    mode: "{{ ssh_center.ssh.dir.mode}}"
+    state: directory
+
+- name: "Check if 'known_hosts' exists"
+  block:
+    - name: "Check if 'known_hosts' exists"
+      stat:
+        path: "{{ item.path }}"
+      with_items:
+      - { path: "{{ ssh_center.ssh.known_hosts.path }}" }
+      register: stat_file
+    - debug:
+        var: item
+      loop: "{{ stat_file | json_query('results[*].stat.exists') }}"
+      changed_when: item == false
+      notify: Create known_hosts
+
+- meta: flush_handlers
+
+- name: Check if ssh key pair exists
+  block:
+    - name: Check if ssh key pair exists
+      stat:
+        path: "{{ item.path }}"
+      with_items:
+      - { path: "{{ ssh_center.ssh.private_key.path }}" }
+      - { path: "{{ ssh_center.ssh.public_key.path }}" }
+      register: stat_file
+    - debug:
+        var: item
+      loop: "{{ stat_file | json_query('results[*].stat.exists') }}"
+      changed_when: item == false
+      notify: Create ssh key pair
+
+- meta: flush_handlers
+
+- name: 'Set owner and group for dir and files'
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ ssh_center.host[0].user }}"
+    group: "{{ ssh_center.host[0].group }}" 
+    mode: "{{ item.mode }}"
+  with_items:
+  - {path: "{{ ssh_center.ssh.dir.path }}", mode: "{{ ssh_center.ssh.dir.mode }}"}
+  - {path: "{{ ssh_center.ssh.private_key.path }}", mode: "{{ ssh_center.ssh.private_key.mode }}"}
+  - {path: "{{ ssh_center.ssh.public_key.path }}", mode: "{{ ssh_center.ssh.public_key.mode }}"}
+  - {path: "{{ ssh_center.ssh.known_hosts.path }}", mode: "{{ ssh_center.ssh.known_hosts.mode }}"}
+
+- name: "Download files from remote to ansible host"
+  fetch:
+    src: "{{ item.src }}"
+    dest: ./roles/ssh_center/files/
+    flat: yes
+  with_items:
+  - { src: "{{ ssh_center.ssh.private_key.path }}" }
+  - { src: "{{ ssh_center.ssh.public_key.path }}" }

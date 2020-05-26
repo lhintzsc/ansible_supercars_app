@@ -2,6 +2,7 @@
 connecting_host: "%" # open for all hosts incl sql clients
 #connecting_host: "127.0.0.1" # open for localhost if weberserver and db are on the same machine
 timezone: "Europe/Vienna"
+timezone_number: "+02:00"
 
 # appdynamics parameter
 machine_agent_zip: machineagent-bundle-64bit-linux-20.4.0.2571.zip

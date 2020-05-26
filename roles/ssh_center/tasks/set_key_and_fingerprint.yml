@@ -1,0 +1,3 @@
+- name: "Set ssh public key on remote and ssh fingerprint on ssh center"
+  include_tasks: set_key_and_fingerprint_loop.yml
+  loop: "{{ ssh_remotes.hosts }}"

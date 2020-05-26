@@ -1,0 +1,14 @@
+
+- name: Add public key to "{{ item.host}}"
+  delegate_to: "{{ item.host }}"
+  authorized_key:
+    user: "{{ item.user }}"
+    state: present
+    key: "{{ lookup('file', 'id_rsa.pub') }}"
+
+- name: Scan and save all SSH host keys
+  lineinfile:
+    dest: "{{ ssh_center.ssh.known_hosts.path}}"
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t {{ ssh_center.ssh.type }}' + ' ' +  hostvars[item.host]['ansible_host'] ) }}"

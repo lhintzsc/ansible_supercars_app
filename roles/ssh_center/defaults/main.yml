@@ -1,0 +1,28 @@
+---
+# defaults file for ssh_center
+
+ssh_center:
+  host:
+    - { host: db_agent, user: appd, group: appd, su: root }
+  ssh:
+    type: rsa
+    dir: 
+      path: "/home/appd/.ssh"
+      mode: "0700"
+    private_key: 
+      file: "id_rsa"
+      path: "/home/appd/.ssh/id_rsa"
+      mode: "0600"
+    public_key:
+      file: "id_rsa.pub"
+      path: "/home/appd/.ssh/id_rsa.pub"
+      mode: "0644"
+    known_hosts: 
+      file: "known_hosts"
+      path: "/home/appd/.ssh/known_hosts"
+      mode: "0644"
+
+ssh_remotes:
+  hosts:
+    - { host: database, user: root, group: root, su: root }
+    - { host: webserver, user: root, group: root, su: root }

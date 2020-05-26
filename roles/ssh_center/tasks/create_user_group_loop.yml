@@ -1,0 +1,18 @@
+- name: "Ensure group '{{ item.group }}' exists"
+  delegate_to: "{{ item.host }}"
+  group:
+    name: "{{ item.group }}"
+    state: present
+
+- name: "Add the user '{{ item.user }}' with a specific uid and a primary group of '{{ item.group }}'"
+  delegate_to: "{{ item.host }}"
+  user:
+    name: "{{ item.user }}"
+    group: "{{ item.group }}"
+
+- name: "Add the user '{{ item.su }}' to groups {{ item.group }}"
+  delegate_to: "{{ item.host }}"
+  user:
+    name: "{{ item.su }}"
+    groups: "{{ item.group }}"
+    append: yes
