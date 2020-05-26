@@ -16,6 +16,7 @@
   roles:
   - centos_server
   - appd_db_agent
+  - ssh_center
 
 - name: Deploy java agent
   tags: appd_java

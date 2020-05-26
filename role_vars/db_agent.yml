@@ -1,0 +1,9 @@
+ssh_center:
+  host:
+    - { host: '{{ ansible_host }}', user: appd, group: appd, su: root }
+  ssh:
+    type: rsa
+
+ssh_remotes:
+  hosts:
+    - { host: database, user: root, group: root, su: root }

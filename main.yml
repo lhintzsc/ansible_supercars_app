@@ -1,0 +1,5 @@
+- include: 0_download_agents.yml
+- include: 1_deploy_centos.yml
+- include: 2_deploy_supercars.yml
+- include: 3_deploy_appd.yml
+- include: 4_inject_java_agent.yml

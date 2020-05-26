@@ -2,7 +2,7 @@
 # defaults file for ssh_center
 
 ssh_center:
-  host:
+  host: # must be exactly one line
     - { host: db_agent, user: appd, group: appd, su: root }
   ssh:
     type: rsa
@@ -23,6 +23,5 @@ ssh_center:
       mode: "0644"
 
 ssh_remotes:
-  hosts:
+  hosts: # can be multiple lines
     - { host: database, user: root, group: root, su: root }
-    - { host: webserver, user: root, group: root, su: root }
