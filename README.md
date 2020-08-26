@@ -1,3 +1,12 @@
+# Content of the playbooks
+
+This playbook creates a simple sample web application for the instrumentation using Appdynamics.
+First, the plain application is deployed. Afterwards, the application is instrumented using
+a Java Agent, a Server Agent, and a DB Agent.
+
+[!Architecture](https://github.com/lhintzsc/ansible_supercars_app/blob/master/docs/Architecture.png)
+
+
 # Apply Playbook
 
 To set your hosts/IPs, your ssh connection and your remote user, edit
