@@ -55,7 +55,7 @@ the plays seperatly as well:
 # Manual execution
 
 If you want to manually deploy appdynamics, you can perform the deployment
-until steps 0-2. Afterwards, you can follow the description in the github
+steps 0-2. Afterwards, you can follow the description in the github
 Wiki article to train a manual deployment and configuration of the Appdynamics
 agents.
 
