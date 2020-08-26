@@ -1,18 +1,20 @@
 # Content of the playbooks
 
-This playbook deploys a simple sample web application for the instrumentation using Appdynamics.
+Using this playbooks, you can deploys a simple web application and monitor it with Appdynamics.
 First, the plain application is deployed. Afterwards, the application is instrumented using
 a Java Agent, a Server Agent, and a DB Agent.
 
 ![Architecture](https://github.com/lhintzsc/ansible_supercars_app/blob/master/docs/Architecture.png)
 
-Use cases for this deployment are:
+You can use this architecture for the following use cases:
 
 * Appdynamics Masters Certification
-* Training of partners and customers
-* Preparation for a Proof of Concept (PoC)
-* Preparation of personal lab environment
+* training of partners and customers
+* preparation for a Proof of Concept (PoC)
+* creation of a personal lab environment
 
+The deployment automates every step on server side. However, the configurations in the Appdynamics
+user interface must still be done manually.
 
 # Prerequisites
 
