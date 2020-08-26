@@ -1,5 +1,6 @@
-- include: 0_download_agents.yml
-- include: 1_deploy_centos.yml
-- include: 2_deploy_supercars.yml
-- include: 3_deploy_appd.yml
-- include: 4_inject_java_agent.yml
+#- import_playbook: 0_download_agents.yml
+- import_playbook: 1_deploy_centos.yml
+- import_playbook: 2_deploy_supercars.yml
+- import_playbook: 3_deploy_appd.yml
+- import_playbook: 4_inject_java_agent.yml
+- import_playbook: 5_create_db_user.yml

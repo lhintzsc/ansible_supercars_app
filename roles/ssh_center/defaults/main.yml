@@ -24,4 +24,4 @@ ssh_center:
 
 ssh_remotes:
   hosts: # can be multiple lines
-    - { host: database, user: root, group: root, su: root }
+    - { host: database, user: "{{ secret_dbuser_os_username }}", group: "{{ secret_dbuser_os_group }}", su: root }
