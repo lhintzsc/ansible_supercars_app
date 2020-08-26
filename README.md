@@ -12,6 +12,7 @@ You can use this architecture for the following use cases:
 * training of partners and customers
 * preparation for a Proof of Concept (PoC)
 * creation of a personal lab environment
+* Webinars and DevNet trainings
 
 The deployment automates every step on server side. However, the configurations in the Appdynamics
 user interface must still be done manually.
