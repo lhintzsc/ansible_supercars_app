@@ -1,59 +1,60 @@
 # Content of the playbooks
 
-This playbook creates a simple sample web application for the instrumentation using Appdynamics.
+This playbook deploys a simple sample web application for the instrumentation using Appdynamics.
 First, the plain application is deployed. Afterwards, the application is instrumented using
 a Java Agent, a Server Agent, and a DB Agent.
 
 ![Architecture](https://github.com/lhintzsc/ansible_supercars_app/blob/master/docs/Architecture.png)
 
+Use cases for this deployment are:
 
-# Apply Playbook
+* Appdynamics Masters Certification
+* Training of partners and customers
+* Preparation for a Proof of Concept (PoC)
+* Preparation of personal lab environment
+
+
+# Prerequisites
+
+This playbook has the following requirements:
+
+* 1-3 VMs based on CentOS with python 2.7 installed and a valid ssh pairing
+* appdynamics controller and licenses (e.g. https://www.appdynamics.com/free-trial/)
+* valid configurations files (hosts, ansible.cfg, vars.yml and vault.yml)
+
+# Configuration files
 
 To set your hosts/IPs, your ssh connection and your remote user, edit
 
 * vi ./hosts
 * vi ./ansible.cfg
 
-To create your personal vault file, do the following
+You need to setup your credentials, appdynamics configurations, proxy and nts server in
 
-* cp ./group_vars/all/vault.yml.cp ./group_vars/all/vault.yml
+* ./group_vars/all/vars.yml
+* ./group_vars/all/vault.yml
 
-Afterwards, all configuration settings can be done here:
+The settings itself are described in the comments of the configuration files.
+You can set the parameters in the test file or reference local system variables.
 
-* vi ./group_vars/all/vault.yml (most settings including secrets)
-* vi ./group_vars/all/vars.yml
+# Workflow
 
-The settings are explained in the configuration files.
-You can encrypt your personal vault file using
+You can deploy the whole architecture using main.yml. However, you can start
+the plays seperatly as well:
 
-* ansible-vault encrypt vault.yml
+* Step 1: ansible-playbook 0_download_agents.yml
+* Step 2: ansible-playbook 1_deploy_centos.yml
+* Step 3: ansible-playbook 2_deploy_supercars.yml
+* Step 4: ansible-playbook 3_deploy_appd.yml
+* Step 5: ansible-playbook 4_inject_java_agent.yml
+* Step 6: ansible-playbook 5_create_db_user.yml
 
-The Playbooks were split chronologically to give a logical order
-and to allow seperate deployment types.
+# Manual execution
 
-Downloads appdynamics agents (optional instrumentation):
-
-* ansible-playbook 0_download_agents.yml --ask-vault-pass
-
-Basic setup for all centos server (core deployment):
-
-* ansible-playbook 1_deploy_centos.yml --ask-vault-pass
-
-Deploy supercars application (core deployment):
-
-* ansible-playbook 2_deploy_supercars.yml --ask-vault-pass
-
-Depploys appdynamics machine agent, java agent, and DB agent (optional instrumentation):
-
-* ansible-playbook 3_deploy_appd.yml --ask-vault-pass
-
-Injects the java agent to JAVA_OPTS (optional instrumentation):
-
-* ansible-playbook 4_inject_java_agent.yml --ask-vault-pass
-
-Create DB user for monitoring the DB and the DB server (optional instrumentation):
-
-* ansible-playbook 5_create_db_user.yml --ask-vault-pass
+If you want to manually deploy appdynamics, you can perform the deployment
+until steps 0-2. Afterwards, you can follow the description in the github
+Wiki article to train a manual deployment and configuration of the Appdynamics
+agents.
 
 # Github Links
 
