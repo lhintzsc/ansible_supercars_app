@@ -12,8 +12,8 @@ com/supercars/preferences/PreferenceException.class
 com/supercars/rest/EnquiryService.class
 com/supercars/usermanagement/User.class
 com/supercars/logging/Logger.class
-com/supercars/rest/PreferenceService.class
 com/supercars/rest/FuelService.class
+com/supercars/rest/PreferenceService.class
 com/supercars/rest/CarService.class
 com/supercars/Leak.class
 com/supercars/dataloader/EnquiryDataLoader.class
