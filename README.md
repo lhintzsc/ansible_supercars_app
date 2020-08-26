@@ -1,6 +1,6 @@
 # Content of the playbooks
 
-Using this playbooks, you can deploys a simple web application and monitor it with Appdynamics.
+Using this playbooks, you can deploy a simple web application and monitor it with Appdynamics.
 First, the plain application is deployed. Afterwards, the application is instrumented using
 a Java Agent, a Server Agent, and a DB Agent.
 
