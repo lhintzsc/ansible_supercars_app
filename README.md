@@ -39,7 +39,7 @@ You need to setup your credentials, appdynamics configurations, proxy and nts se
 * ./group_vars/all/vault.yml
 
 The settings itself are described in the comments of the configuration files.
-You can set the parameters in the test file or reference local system variables.
+You can set the parameters in the files directly or reference environment variables.
 
 # Workflow
 
