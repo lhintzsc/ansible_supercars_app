@@ -20,7 +20,8 @@ user interface must still be done manually.
 
 This playbook has the following requirements:
 
-* 1-3 VMs based on CentOS with python 2.7 installed and a valid ssh pairing
+* VMs based on CentOS7 (you can collapse the deployment using 1 VM for all 3 ansible hosts)
+* Python 2.7 must be installed with valid ssh connection for ansible
 * appdynamics controller and licenses (e.g. https://www.appdynamics.com/free-trial/)
 * valid configurations files (hosts, ansible.cfg, vars.yml and vault.yml)
 
