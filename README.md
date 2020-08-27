@@ -59,7 +59,19 @@ If you want to manually deploy appdynamics, you can perform the deployment steps
 Afterwards, you can follow the description in the github [Wiki](https://github.com/lhintzsc/ansible_supercars_app/wiki) to train a manual 
 deployment and configuration of the Appdynamics agents.
 
-# Github References
+# Getting help
+
+If you need help with this code, you can do the folloowing:
+
+* create an issue (preferred)
+* ping me on webex (lhintzsc)
+* write me a laim (lhintzsc@cisco.com)
+
+Please note that I will priotize my daily tasks. As a result, there will be no SLA
+when you get an answer. However, I am happy to support if it is possible.
+
+
+# Credits and references
 
 The following github resources were used to create the playbook:
 
