@@ -30,21 +30,21 @@ This playbook has the following requirements:
 
 To set your hosts/IPs, your ssh connection and your remote user, edit
 
-* vi ./hosts
-* vi ./ansible.cfg
+* [hosts](https://github.com/lhintzsc/ansible_supercars_app/blob/master/hosts)
+* [hosts](https://github.com/lhintzsc/ansible_supercars_app/blob/master/ansible.cfg)
 
 You need to setup your credentials, appdynamics configurations, proxy and nts server in
 
 * ./group_vars/all/vars.yml
 * ./group_vars/all/vault.yml
 
-The settings itself are described in the comments of the configuration files.
+The settings itself are described in the comments of the configuration files. 
 You can set the parameters in the files directly or reference environment variables.
 
 # Workflow
 
-You can deploy the whole architecture using main.yml. However, you can start
-the plays seperatly as well:
+You can deploy the whole architecture using main.yml. 
+However, you can start the plays seperatly as well:
 
 * Step 1: ansible-playbook 0_download_agents.yml
 * Step 2: ansible-playbook 1_deploy_centos.yml
@@ -55,10 +55,9 @@ the plays seperatly as well:
 
 # Manual execution
 
-If you want to manually deploy appdynamics, you can perform the deployment
-steps 0-2. Afterwards, you can follow the description in the github
-Wiki article to train a manual deployment and configuration of the Appdynamics
-agents.
+If you want to manually deploy appdynamics, you can perform the deployment steps 0-2. 
+Afterwards, you can follow the description in the github Wiki article to train a manual 
+deployment and configuration of the Appdynamics agents.
 
 # Github Links
 
