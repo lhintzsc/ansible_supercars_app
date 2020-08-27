@@ -65,7 +65,7 @@ If you need help with this code, you can do the folloowing:
 
 * create an issue (preferred)
 * ping me on webex (lhintzsc)
-* write me a laim (lhintzsc@cisco.com)
+* write me a mail (lhintzsc@cisco.com)
 
 Please note that I will priotize my daily tasks. As a result, there will be no SLA
 when you get an answer. However, I am happy to support if it is possible.
