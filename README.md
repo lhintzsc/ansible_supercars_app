@@ -1,3 +1,5 @@
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/lhintzsc/ansible_supercars_app)
+
 # Content of the playbooks
 
 Using this playbooks, you can deploy a simple web application and monitor it with Appdynamics.
