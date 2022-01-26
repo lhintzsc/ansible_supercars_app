@@ -23,6 +23,7 @@ secret_dbuser_username: "DBUSER"
 secret_dbuser_password: "{{ lookup('env','SECRET_LAB_PASSWORD') }}"
 secret_dbuser_os_username: "dbuser"
 secret_dbuser_os_group: "appd"
+secret_dbagent_name: "LHINTZSC-SUPERCARS"
 
 # appdynamics agent configuration
 secret_controller_url: "{{ lookup('env','SECRET_APPD_CONTROLLER') }}" # account.saas.appdynamics.com
@@ -34,11 +35,11 @@ secret_account_name: "{{ lookup('env','SECRET_APPD_ACCOUNT') }}" # from account.
 secret_account_name_global: "{{ lookup('env','SECRET_APPD_ACCOUNT_GLOBAL') }}" # from account.saas.appdynamics.com -> settings -> license -> account
 secret_account_key: "{{ lookup('env','SECRET_APPD_ACCOUNT_KEY') }}" # from account.saas.appdynamics.com -> settings -> license -> account
 
-secret_application: 'supercars'
+secret_application: 'LHINTZSC-supercars'
 secret_tier: 'tomcat'
 secret_node: 'computer'
 
-secret_unique_hostid: '{{ ansible_host }}' # take from inventory
+secret_unique_hostid: 'LHINTZSC-{{ ansible_host }}' # take from inventory
 
 secret_sim_enabled: 'true'
 secret_metric_path: ""

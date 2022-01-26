@@ -8,6 +8,7 @@ unzip_directory: "{{ appd_directory }}/{{ agent_name }}"
 
 # config files
 appd_controller_info: '{{ agent_directory }}/conf/controller-info.xml'
+appd_dbagent_name: "{{ secret_dbagent_name }}"
 
 # db agent service
 appd_systemd_service_name: appd-db-agent.service

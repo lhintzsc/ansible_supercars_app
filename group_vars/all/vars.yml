@@ -17,3 +17,7 @@ all_appd_directory: /opt/appd
 java_agent_directory: /opt/appd/java_agent
 machine_agent_directory: /opt/appd/machine_agent
 db_agent_directory: /opt/appd/db_agent
+
+deployment_tiersplit_per_server: false
+deployment_with_proxy: false
+
