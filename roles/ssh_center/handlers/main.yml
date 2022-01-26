@@ -1,5 +1,4 @@
 ---
-# handlers file for ssh_center
 - name: "Create known_hosts"
   file:
     path: "{{ ssh_center.ssh.known_hosts.path }}"

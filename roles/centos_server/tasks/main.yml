@@ -19,6 +19,7 @@
 - name: Set hostname
   hostname: 
     name: "{{inventory_hostname}}"
+  when: deployment_tiersplit_per_server
 
 - name: Copy vimrc file
   copy:
@@ -36,6 +37,7 @@
   template:
     src: profile.j2
     dest: /etc/profile
+  when: deployment_with_proxy
   
 - name: "Set system timezone to {{ centos_timezone }}"
   timezone:

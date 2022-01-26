@@ -8,12 +8,21 @@ JAVA="/usr/bin/java" # java exe
 AGENT="{{agent_directory}}/db-agent.jar" # agent lib
 
 # Agent Options
+
 AGENT_OPTIONS=""
 AGENT_OPTIONS="$AGENT_OPTIONS -Dappdynamics.agent.uniqueHostId={{ appd_unique_hostid }}"
+AGENT_OPTIONS="$AGENT_OPTIONS -Ddbagent.name={{ appd_dbagent_name }}"
+
+{% if deployment_with_proxy %}
 AGENT_OPTIONS="$AGENT_OPTIONS -Dappdynamics.http.proxyHost={{ http_proxy_host }}"
 AGENT_OPTIONS="$AGENT_OPTIONS -Dappdynamics.http.proxyPort={{ http_proxy_port }}"
 AGENT_OPTIONS="$AGENT_OPTIONS -Dappdynamics.https.proxyHost={{ https_proxy_host }}"
 AGENT_OPTIONS="$AGENT_OPTIONS -Dappdynamics.https.proxyPort={{ https_proxy_port }}"
+{% else %}
+{% endif %}
+
+
+
 
 start()
 {

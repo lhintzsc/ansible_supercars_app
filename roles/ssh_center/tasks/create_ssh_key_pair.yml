@@ -35,7 +35,7 @@
         var: item
       loop: "{{ stat_file | json_query('results[*].stat.exists') }}"
       changed_when: item == false
-      notify: Create ssh key pair
+      notify: "Create ssh key pair"
 
 - meta: flush_handlers
 

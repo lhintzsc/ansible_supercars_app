@@ -16,11 +16,18 @@ Environment=MACHINE_AGENT_HOME={{ agent_directory }}
 Environment=JAVA_HOME={{ agent_directory }}/jre
 
 # Specify agent system properties for systemd here by setting or editing JAVA_OPTS, e.g.,
+
+{% if deployment_with_proxy %}
 Environment="JAVA_OPTS=\
+		-Dappdynamics.agent.maxMetrics=10000 \
     -Dappdynamics.http.proxyHost={{ http_proxy_host }} \
     -Dappdynamics.http.proxyPort={{ http_proxy_port }} \
     -Dappdynamics.https.proxyHost={{ https_proxy_host }} \
     -Dappdynamics.https.proxyPort={{ https_proxy_port }}"
+{% else %}
+Environment="JAVA_OPTS=\
+		-Dappdynamics.agent.maxMetrics=10000"
+{% endif %}
 
 # Modify the next two lines to specify the user to run the machine agent as. Note that
 # you will need to ensure that:
