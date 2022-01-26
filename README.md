@@ -23,6 +23,7 @@ user interface must still be done manually.
 
 This playbook has the following requirements:
 
+* for the host that executes the playbook you must have ansible-playbook --version => 2.9.27
 * VMs based on CentOS7 (you can collapse the deployment using 1 VM for all 3 ansible hosts)
 * Python 2.7 must be installed with valid ssh connection for ansible
 * appdynamics controller and licenses (e.g. https://www.appdynamics.com/free-trial/)
