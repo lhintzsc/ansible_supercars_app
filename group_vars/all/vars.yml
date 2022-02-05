@@ -1,6 +1,6 @@
+connecting_host: "%" # open for all hosts incl sql clients
+#connecting_host: "127.0.0.1" # open for localhost if weberserver and db are on the same machine
 #connecting_host: "{{ hostvars['webserver']['ansible_host'] }}" # supercars DB user only for webserver
-#connecting_host: "%" # open for all hosts incl sql clients
-connecting_host: "127.0.0.1" # open for localhost if weberserver and db are on the same machine
 timezone: "Europe/Vienna"
 timezone_number: "+02:00"
 
@@ -22,4 +22,3 @@ db_agent_directory: /opt/appd/db_agent
 
 deployment_tiersplit_per_server: false
 deployment_with_proxy: true
-
