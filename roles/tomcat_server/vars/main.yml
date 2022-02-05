@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
 tomcat_version: "{{ tomcat_uri_version }}"
 tomcat_file_path: "{{ tomcat_uri | basename }}"
-
-=======
-tomcat_version: 8.5.75
->>>>>>> 308eaa97809a2a7392418dc3ba5d8f78b3b49d10
 tomcat_permissions_production: True
 tomcat_users:
   - username: "{{ secret_tomcat_username }}"
