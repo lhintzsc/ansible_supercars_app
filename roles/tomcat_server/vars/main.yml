@@ -1,5 +1,5 @@
 ---
-tomcat_version: 8.5.23
+tomcat_version: 8.5.75
 tomcat_permissions_production: True
 tomcat_users:
   - username: "{{ secret_tomcat_username }}"
