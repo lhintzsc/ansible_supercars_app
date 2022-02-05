@@ -1,6 +1,7 @@
 roles/appd_machine_agent/files/machineagent-bundle-64bit-linux-*.zip
 roles/appd_java_agent/files/AppServerAgent-*.zip
 roles/appd_db_agent/files/db-agent-*.zip
+roles/tomcat_server/files/apache-tomcat-*.tar.gz
 cross_role_data/temp/id_rsa
 cross_role_data/temp/id_rsa.pub
 cross_role_data/temp/id_ssh_rsa.pub

@@ -33,11 +33,14 @@
   changed_when: False
   when: not is_installed.stat.exists
 
-- name: Download apache-tomcat-{{ tomcat_version }}.tar.gz
-  get_url:
-    url: "{{ tomcat_downloadURL }}/tomcat/tomcat-{{ tomcat_version.split('.')[0] }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
-    dest: '{{ tomcat_temp_download_path }}'
-    timeout: 120
+- name: "Copy {{ tomcat_file_path }} to {{ tomcat_temp_download_path }}"
+  become: true 
+  copy:
+    src: "{{ tomcat_file_path}}"
+    dest: "{{ tomcat_temp_download_path }}"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"        
+    mode: 0644
   when: not is_installed.stat.exists
 
 - name: Unarchive apache-tomcat-{{ tomcat_version }}.tar.gz at {{ tomcat_install_path }}
